@@ -1,7 +1,7 @@
 {
-  "name": "fany-design",
+  "name": "fanny-design",
   "version": "1.0.0",
-  "description": "Site vitrine officiel de FANY Design - Maison de couture africaine",
+  "description": "Site vitrine officiel de FANNY Design - Maison de couture africaine",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

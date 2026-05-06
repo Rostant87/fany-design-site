@@ -1,5 +1,5 @@
 /**
- * FANY Design - Serveur Express
+ * FANNY Design - Serveur Express
  * Maison de couture africaine
  * API REST + Serveur de fichiers statiques
  */
@@ -163,7 +163,7 @@ app.get('/admin', (req, res) => {
 
 // ─── Démarrage ────────────────────────────────────────────────────────────────
 app.listen(PORT, () => {
-  console.log(`\n✨ FANY Design — Serveur démarré`);
+  console.log(`\n✨ FANNY Design — Serveur démarré`);
   console.log(`🌐 Site public   : http://localhost:${PORT}`);
   console.log(`🔧 Administration: http://localhost:${PORT}/admin`);
   console.log(`📦 API           : http://localhost:${PORT}/api/models\n`);

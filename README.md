@@ -1,4 +1,4 @@
-# 🎨 FANY Design — Site Vitrine
+# 🎨 FANNY Design — Site Vitrine
 
 **Maison de Couture Africaine au Cameroun**
 
@@ -36,11 +36,11 @@ node server.js
 
 | Champ | Valeur |
 |-------|--------|
-| Identifiant | `fany` |
-| Mot de passe | `FanyDesign2024` |
+| Identifiant | `fanny` |
+| Mot de passe | `FannyDesign2024` |
 
 > ⚠️ **Important** : Changez le mot de passe dans `public/admin.html`
-> (ligne : `const ADMIN_CREDS = { user: 'fany', pass: 'FanyDesign2024' }`)
+> (ligne : `const ADMIN_CREDS = { user: 'fanny', pass: 'FannyDesign2024' }`)
 
 ---
 
@@ -93,7 +93,7 @@ fany-design/
 npm install -g pm2
 
 # Démarrer avec PM2
-pm2 start server.js --name "fany-design"
+pm2 start server.js --name "fanny-design"
 pm2 save
 pm2 startup
 ```
@@ -116,5 +116,5 @@ pm2 startup
 
 ## 📧 Support
 
-Pour toute question technique, contactez FANY Design :
+Pour toute question technique, contactez FANNY Design :
 **WhatsApp : +237 671 743 463**

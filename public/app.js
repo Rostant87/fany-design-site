@@ -1,5 +1,5 @@
 /**
- * FANY Design — app.js
+ * FANNY Design — app.js
  * Logique frontend : chargement modèles, filtres, modal, WhatsApp, téléchargement
  */
 
@@ -244,7 +244,7 @@ function buildModelCard(model) {
       </div>
       <div class="model-body">
         <h3 class="model-name">${escapeHtml(model.name)}</h3>
-        <p class="model-desc">${escapeHtml(model.description || 'Créations FANY Design')}</p>
+        <p class="model-desc">${escapeHtml(model.description || 'Créations FANNY Design')}</p>
         <div class="model-actions">
           <button class="btn btn-download btn-sm"
                   onclick="downloadModel(event, '${escapeAttr(imgSrc)}', '${escapeAttr(model.name)}')"
@@ -275,7 +275,7 @@ async function downloadModel(e, imgSrc, name) {
     const a     = document.createElement('a');
     const ext   = imgSrc.split('.').pop().split('?')[0] || 'jpg';
     a.href      = url;
-    a.download  = `FANY-Design-${name.replace(/\s+/g, '-')}.${ext}`;
+    a.download  = `FANNY-Design-${name.replace(/\s+/g, '-')}.${ext}`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -286,7 +286,7 @@ async function downloadModel(e, imgSrc, name) {
     // Fallback direct link
     const a    = document.createElement('a');
     a.href     = imgSrc;
-    a.download = `FANY-Design-${name}.jpg`;
+    a.download = `FANNY-Design-${name}.jpg`;
     a.target   = '_blank';
     document.body.appendChild(a);
     a.click();
@@ -333,7 +333,7 @@ function openModal(model) {
   nameEl.textContent = model.name;
   descEl.textContent = model.description || '';
   dlBtn.href   = model.image || '/images/logo.jpg';
-  dlBtn.setAttribute('download', `FANY-Design-${model.name}.jpg`);
+  dlBtn.setAttribute('download', `FANNY-Design-${model.name}.jpg`);
   waBtn.href   = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
   backdrop.classList.add('open');

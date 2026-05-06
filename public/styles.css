@@ -1,5 +1,5 @@
 /* =====================================================
-   FANY DESIGN — Styles principaux
+   FANNY DESIGN — Styles principaux
    Maison de couture africaine
    Palette : Marine profond · Or · Rouge africain · Turquoise
    ===================================================== */
@@ -122,6 +122,13 @@ a   { text-decoration: none; color: inherit; }
   object-fit: cover;
   border: 2px solid var(--gold);
   box-shadow: 0 0 16px rgba(232,146,10,0.4);
+  transition: all var(--transition);
+  animation: glow 3s ease-in-out infinite;
+}
+
+.logo-wrap:hover .logo-img {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0 24px rgba(232,146,10,0.6);
 }
 
 .logo-text {
@@ -159,36 +166,69 @@ a   { text-decoration: none; color: inherit; }
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: rgba(255,255,255,0.75);
-  transition: color var(--transition);
+  transition: all var(--transition);
   position: relative;
+  padding: 8px 0;
+}
+
+.nav a::before {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  transition: width var(--transition);
+  border-radius: 1px;
 }
 
 .nav a::after {
   content: '';
   position: absolute;
-  bottom: -4px; left: 0;
-  width: 0; height: 1px;
-  background: var(--gold);
-  transition: width var(--transition);
+  inset: -4px;
+  background: radial-gradient(circle at center, rgba(232,146,10,0.1), transparent);
+  opacity: 0;
+  transition: opacity var(--transition);
+  border-radius: 8px;
+  z-index: -1;
 }
 
-.nav a:hover { color: var(--gold-light); }
-.nav a:hover::after { width: 100%; }
+.nav a:hover { 
+  color: var(--gold-light); 
+  transform: translateY(-1px);
+  text-shadow: 0 0 8px rgba(232,146,10,0.3);
+}
+
+.nav a:hover::before { width: 100%; }
+.nav a:hover::after { opacity: 1; }
 
 .nav-cta {
-  background: var(--gold);
+  background: linear-gradient(135deg, var(--gold), var(--gold-light));
   color: var(--navy) !important;
   padding: 8px 20px;
   border-radius: var(--radius-xl);
   font-weight: 600 !important;
-  transition: background var(--transition), transform var(--transition) !important;
+  transition: all var(--transition) !important;
+  box-shadow: 0 4px 16px rgba(232,146,10,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-cta::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  transition: left 0.6s ease;
 }
 
 .nav-cta:hover {
-  background: var(--gold-light) !important;
-  transform: translateY(-1px);
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 8px 24px rgba(232,146,10,0.5);
 }
 
+.nav-cta:hover::before { left: 100%; }
 .nav-cta::after { display: none !important; }
 
 .hamburger {
@@ -618,7 +658,7 @@ a   { text-decoration: none; color: inherit; }
 }
 
 .about::before {
-  content: '✦ FANY DESIGN ✦';
+  content: '✦ FANNY DESIGN ✦';
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
@@ -931,6 +971,21 @@ footer a { color: var(--gold); }
 @keyframes modalIn {
   from { opacity: 0; transform: scale(0.88) translateY(16px); }
   to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 16px rgba(232,146,10,0.4); }
+  50% { box-shadow: 0 0 24px rgba(232,146,10,0.6); }
 }
 
 /* Apparition des cartes au scroll */
