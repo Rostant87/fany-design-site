@@ -1005,6 +1005,54 @@ const API         = '/api/models';
 let allAdminModels = [];
 let filteredModels = [];
 
+/* ── Stockage local pour Vercel ─────────── */
+function getLocalModels() {
+  const stored = localStorage.getItem('fanny_models');
+  return stored ? JSON.parse(stored) : [
+    {
+      "id": "MOD001",
+      "name": "Robe Élégance Royale",
+      "category": "Robes",
+      "description": "Robe africaine moderne à motifs wax, parfaite pour les cérémonies et soirées élégantes.",
+      "image": "/images/logo.jpg",
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "id": "MOD002",
+      "name": "Ensemble Festif Doré",
+      "category": "Ensembles",
+      "description": "Ensemble deux pièces brodé main, alliant tradition africaine et modernité.",
+      "image": "/images/logo.jpg",
+      "createdAt": "2024-01-02T00:00:00.000Z"
+    },
+    {
+      "id": "MOD003",
+      "name": "Kaba Prestige",
+      "category": "Kaba",
+      "description": "Kaba classique revisité avec des broderies contemporaines et des tissus de haute qualité.",
+      "image": "/images/logo.jpg",
+      "createdAt": "2024-01-03T00:00:00.000Z"
+    },
+    {
+      "id": "MOD004",
+      "name": "Pantalon Wax Urbain",
+      "category": "Pantalons",
+      "description": "Pantalon large en tissu wax, coupe moderne pour un look urban-chic africain.",
+      "image": "/images/logo.jpg",
+      "createdAt": "2024-01-04T00:00:00.000Z"
+    }
+  ];
+}
+
+function saveLocalModels(models) {
+  localStorage.setItem('fanny_models', JSON.stringify(models));
+}
+
+/* ── Vérification si on est sur Vercel ─────── */
+function isVercel() {
+  return window.location.hostname.includes('vercel.app');
+}
+
 /* ── Authentification ─────────────────── */
 function doLogin() {
   const user = document.getElementById('loginUser').value.trim();
@@ -1041,17 +1089,33 @@ function doLogout() {
 /* ── Chargement modèles ───────────────── */
 async function loadAdminModels() {
   try {
-    const res = await fetch(API);
-    if (!res.ok) throw new Error('Erreur API');
-    allAdminModels = await res.json();
-    filteredModels = [...allAdminModels];
-    renderAdminModels(filteredModels);
-    updateAdminStats(allAdminModels);
-    updateCatDatalist(allAdminModels);
+    let models;
+    
+    if (isVercel()) {
+      // Utiliser localStorage sur Vercel
+      models = getLocalModels();
+      allAdminModels = models;
+      filteredModels = models;
+      renderAdminModels();
+      updateAdminStats();
+    } else {
+      // Utiliser l'API en local
+      const res = await fetch(API);
+      if (!res.ok) throw new Error('Erreur chargement');
+      models = await res.json();
+      allAdminModels = models;
+      filteredModels = models;
+      renderAdminModels();
+      updateAdminStats();
+    }
   } catch(e) {
-    showAdminToast('Erreur chargement : ' + e.message, 'error');
-    document.getElementById('adminModelsList').innerHTML = `
-      <div class="empty-admin"><div class="icon">⚠️</div><p>Erreur de chargement. Vérifiez le serveur.</p></div>`;
+    showAdminToast('Erreur chargement modèles : ' + e.message, 'error');
+    // Fallback sur localStorage
+    const models = getLocalModels();
+    allAdminModels = models;
+    filteredModels = models;
+    renderAdminModels();
+    updateAdminStats();
   }
 }
 
@@ -1145,21 +1209,23 @@ async function addModel() {
   if (!name) return showAdminToast('Le nom est obligatoire.', 'error');
   if (!cat)  return showAdminToast('La catégorie est obligatoire.', 'error');
 
-  const fd = new FormData();
-  fd.append('name', name);
-  fd.append('category', cat);
-  fd.append('description', desc);
-  if (file) fd.append('image', file);
-
-  btn.disabled     = true;
-  btn.textContent  = '⏳ Ajout en cours...';
-
-  try {
-    const res  = await fetch(API, { method: 'POST', body: fd });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Erreur serveur');
-
+  if (isVercel()) {
+    // Mode Vercel : utiliser localStorage
+    const models = getLocalModels();
+    const newModel = {
+      id: 'MOD' + String(models.length + 1).padStart(3, '0'),
+      name: name,
+      category: cat,
+      description: desc,
+      image: '/images/logo.jpg', // Placeholder pour Vercel
+      createdAt: new Date().toISOString()
+    };
+    
+    models.push(newModel);
+    saveLocalModels(models);
+    
     showAdminToast(`✓ "${name}" ajouté avec succès !`, 'success');
+    
     // Reset formulaire
     document.getElementById('addName').value  = '';
     document.getElementById('addCat').value   = '';
@@ -1169,13 +1235,42 @@ async function addModel() {
     if (prev) { prev.src = ''; prev.style.display = 'none'; }
 
     await loadAdminModels();
-    // Collapse la section ajout et scroll vers la liste
     document.getElementById('addSection').classList.add('collapsed');
-  } catch(e) {
-    showAdminToast('Erreur : ' + e.message, 'error');
-  } finally {
-    btn.disabled    = false;
-    btn.textContent = '✦ Ajouter le modèle';
+    
+  } else {
+    // Mode local : utiliser l'API
+    const fd = new FormData();
+    fd.append('name', name);
+    fd.append('category', cat);
+    fd.append('description', desc);
+    if (file) fd.append('image', file);
+
+    btn.disabled     = true;
+    btn.textContent  = '⏳ Ajout en cours...';
+
+    try {
+      const res  = await fetch(API, { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Erreur serveur');
+
+      showAdminToast(`✓ "${name}" ajouté avec succès !`, 'success');
+      // Reset formulaire
+      document.getElementById('addName').value  = '';
+      document.getElementById('addCat').value   = '';
+      document.getElementById('addDesc').value  = '';
+      document.getElementById('addImage').value = '';
+      const prev = document.getElementById('addPreview');
+      if (prev) { prev.src = ''; prev.style.display = 'none'; }
+
+      await loadAdminModels();
+      // Collapse la section ajout et scroll vers la liste
+      document.getElementById('addSection').classList.add('collapsed');
+    } catch(e) {
+      showAdminToast('Erreur : ' + e.message, 'error');
+    } finally {
+      btn.disabled    = false;
+      btn.textContent = '✦ Ajouter le modèle';
+    }
   }
 }
 
