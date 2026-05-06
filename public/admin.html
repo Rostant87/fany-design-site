@@ -814,6 +814,41 @@
       </div>
     </div>
 
+    <!-- ── Sécurité & Paramètres ─────────────── -->
+    <div class="section-box">
+      <div class="section-box-header" onclick="toggleSection(this.closest('.section-box'))">
+        <h2>🔐 Sécurité & Paramètres</h2>
+        <span class="section-box-toggle">▼</span>
+      </div>
+      <div class="section-box-body">
+        <div class="form-grid">
+          <div class="form-group">
+            <label class="form-label" for="currentPass">Mot de passe actuel</label>
+            <input type="password" id="currentPass" class="form-input" placeholder="Entrez le mot de passe actuel" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="newPass">Nouveau mot de passe</label>
+            <input type="password" id="newPass" class="form-input" placeholder="Entrez le nouveau mot de passe" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="confirmPass">Confirmer le mot de passe</label>
+            <input type="password" id="confirmPass" class="form-input" placeholder="Confirmez le nouveau mot de passe" />
+          </div>
+          <div class="form-group full">
+            <button class="btn-submit" onclick="changePassword()" style="background: var(--teal);">
+              🔒 Mettre à jour le mot de passe
+            </button>
+          </div>
+        </div>
+        <div style="margin-top: 20px; padding: 15px; background: rgba(42,181,200,0.1); border-radius: 8px; border-left: 3px solid var(--teal);">
+          <p style="font-size: 0.85rem; color: var(--text-mid); margin: 0;">
+            <strong>⚠️ Important :</strong> La modification du mot de passe mettra à jour le fichier de configuration. 
+            Assurez-vous de mémoriser le nouveau mot de passe car il sera nécessaire pour les prochaines connexions.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <!-- ── Liste des modèles ─────────────── -->
     <div class="section-box">
       <div class="section-box-header" onclick="toggleSection(this.closest('.section-box'))">
@@ -896,7 +931,7 @@
    FANNY Design — admin.js (inline)
    ───────────────────────────────────────── */
 
-const ADMIN_CREDS = { user: 'fany', pass: 'FanyDesign2024' };
+const ADMIN_CREDS = { user: 'f@nny', pass: 'F@nny2026' };
 const API         = '/api/models';
 
 let allAdminModels = [];
@@ -1162,6 +1197,59 @@ async function confirmDelete() {
   } catch(e) {
     showAdminToast('Erreur suppression : ' + e.message, 'error');
     closeConfirmModal();
+  }
+}
+
+/* ── Changement de mot de passe ─────────── */
+async function changePassword() {
+  const currentPass = document.getElementById('currentPass').value;
+  const newPass     = document.getElementById('newPass').value;
+  const confirmPass = document.getElementById('confirmPass').value;
+  
+  // Validation
+  if (!currentPass || !newPass || !confirmPass) {
+    showAdminToast('⚠️ Tous les champs sont obligatoires', 'error');
+    return;
+  }
+  
+  if (currentPass !== ADMIN_CREDS.pass) {
+    showAdminToast('❌ Le mot de passe actuel est incorrect', 'error');
+    document.getElementById('currentPass').value = '';
+    document.getElementById('currentPass').focus();
+    return;
+  }
+  
+  if (newPass.length < 6) {
+    showAdminToast('❌ Le nouveau mot de passe doit contenir au moins 6 caractères', 'error');
+    document.getElementById('newPass').focus();
+    return;
+  }
+  
+  if (newPass !== confirmPass) {
+    showAdminToast('❌ Les nouveaux mots de passe ne correspondent pas', 'error');
+    document.getElementById('confirmPass').value = '';
+    document.getElementById('confirmPass').focus();
+    return;
+  }
+  
+  try {
+    // Mettre à jour les identifiants en mémoire
+    ADMIN_CREDS.pass = newPass;
+    
+    // Vider les champs
+    document.getElementById('currentPass').value = '';
+    document.getElementById('newPass').value = '';
+    document.getElementById('confirmPass').value = '';
+    
+    showAdminToast('✅ Mot de passe mis à jour avec succès !', 'success');
+    
+    // Optionnel: afficher un rappel
+    setTimeout(() => {
+      showAdminToast('💡 Nouveau mot de passe: ' + newPass + ' - Notez-le bien !', 'success');
+    }, 2000);
+    
+  } catch (error) {
+    showAdminToast('❌ Erreur lors de la mise à jour: ' + error.message, 'error');
   }
 }
 
