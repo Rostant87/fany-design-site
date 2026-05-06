@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FANY Design — Maison de couture africaine au Cameroun. Robes, ensembles, kaba et tenues sur mesure." />
+  <meta name="theme-color" content="#0d1b2a" />
+  <title>FANY Design — Maison de Couture Africaine</title>
+
+  <!-- Favicon via logo -->
+  <link rel="icon" type="image/jpeg" href="/images/logo.jpg" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/styles.css" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="FANY Design — Couture Africaine" />
+  <meta property="og:description" content="Découvrez nos créations exclusives de mode africaine." />
+  <meta property="og:image" content="/images/logo.jpg" />
+</head>
+<body>
+
+  <!-- ════════════════════ HEADER ════════════════════ -->
+  <header class="header" id="header">
+    <div class="header-inner">
+      <a href="/" class="logo-wrap" aria-label="FANY Design - Accueil">
+        <img src="/images/logo.jpg" alt="Logo FANY Design" class="logo-img" />
+        <div class="logo-text">
+          <span class="logo-name">FANY Design</span>
+          <span class="logo-sub">Maison de Couture</span>
+        </div>
+      </a>
+
+      <nav class="nav" id="mainNav" aria-label="Navigation principale">
+        <a href="#accueil">Accueil</a>
+        <a href="#categories">Catégories</a>
+        <a href="#modeles">Modèles</a>
+        <a href="#apropos">À propos</a>
+        <a href="#contact" class="nav-cta">Commander</a>
+      </nav>
+
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ════════════════════ HERO ════════════════════ -->
+  <section class="hero" id="accueil" aria-label="Bienvenue chez FANY Design">
+    <div class="hero-content">
+      <div class="hero-badge">Cameroun · Mode Africaine · Sur Mesure</div>
+      <h1 class="hero-title">
+        L'Art de la<br />
+        <span>Couture</span><br />
+        Africaine
+      </h1>
+      <p class="hero-desc">
+        Découvrez des créations uniques alliant tradition africaine et élégance contemporaine.
+        Chaque modèle est une œuvre pensée pour vous sublimer.
+      </p>
+      <div class="hero-actions">
+        <a href="#modeles" class="btn btn-primary">
+          ✦ Voir les Modèles
+        </a>
+        <a href="https://wa.me/237671743463?text=Bonjour%20FANY%20Design%2C%20je%20souhaite%20des%20informations%20sur%20vos%20créations."
+           class="btn btn-whatsapp"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Contacter FANY Design sur WhatsApp">
+          📲 WhatsApp
+        </a>
+      </div>
+    </div>
+    <div class="hero-ornament" aria-hidden="true">✦ ◆ ✦ ◆ ✦</div>
+  </section>
+
+  <!-- ════════════════════ CATÉGORIES ════════════════════ -->
+  <section class="categories" id="categories" aria-label="Catégories de modèles">
+    <div class="container">
+      <div class="categories-header">
+        <p class="section-subtitle">Notre collection</p>
+        <h2 class="section-title">Nos <span>Catégories</span></h2>
+      </div>
+      <div class="categories-grid" id="categoriesGrid" aria-live="polite">
+        <!-- Généré dynamiquement par app.js -->
+        <div class="loader-wrap">
+          <div class="loader" aria-label="Chargement..."></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ MODÈLES ════════════════════ -->
+  <section class="models-section" id="modeles" aria-label="Galerie des modèles">
+    <div class="container">
+      <div class="models-header">
+        <div>
+          <p class="section-subtitle">Galerie</p>
+          <h2 class="section-title">Nos <span>Créations</span></h2>
+        </div>
+      </div>
+
+      <!-- Filtres -->
+      <div class="filter-bar" id="filterBar" aria-label="Filtrer par catégorie" role="group"></div>
+
+      <!-- Grille des modèles -->
+      <div class="models-grid" id="modelsGrid" aria-live="polite">
+        <div class="loader-wrap">
+          <div class="loader" aria-label="Chargement des modèles..."></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ À PROPOS ════════════════════ -->
+  <section class="about" id="apropos" aria-label="À propos de FANY Design">
+    <div class="container">
+      <div class="about-inner">
+        <div class="about-img-wrap">
+          <img src="/images/logo.jpg" alt="Logo FANY Design" class="about-img" />
+          <div class="about-img-deco" aria-hidden="true"></div>
+        </div>
+        <div class="about-content">
+          <p class="section-subtitle">Notre histoire</p>
+          <h2 class="section-title">FANY <span>Design</span></h2>
+          <p class="about-text">
+            Bienvenue dans notre maison de couture, où l'héritage culturel africain
+            se mêle à l'élégance moderne. Chaque création FANY Design est confectionnée
+            avec passion, en utilisant des tissus wax authentiques, des broderies
+            artisanales et des coupes soigneusement travaillées.
+            <br /><br />
+            Notre atelier au Cameroun est un espace de création où tradition
+            et modernité dialoguent pour donner naissance à des pièces uniques
+            qui célèbrent la beauté africaine sous toutes ses formes.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat">
+              <div class="stat-num" id="totalModels">—</div>
+              <div class="stat-label">Modèles</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num" id="totalCategories">—</div>
+              <div class="stat-label">Catégories</div>
+            </div>
+            <div class="stat">
+              <div class="stat-num">100%</div>
+              <div class="stat-label">Fait main</div>
+            </div>
+          </div>
+
+          <br />
+          <a href="https://wa.me/237671743463?text=Bonjour%20FANY%20Design%2C%20je%20voudrais%20en%20savoir%20plus%20sur%20votre%20atelier."
+             class="btn btn-primary"
+             target="_blank"
+             rel="noopener noreferrer">
+            📲 Nous contacter
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ CONTACT ════════════════════ -->
+  <section class="contact" id="contact" aria-label="Nous contacter">
+    <div class="container">
+      <div class="contact-card">
+        <p class="section-subtitle">Commandez maintenant</p>
+        <h2 class="section-title">Commander <span>Via WhatsApp</span></h2>
+        <p>Choisissez votre modèle, téléchargez-le et envoyez-nous un message pour passer commande. Notre équipe vous répondra dans les plus brefs délais.</p>
+        <div class="contact-tel">📞 +237 671 743 463</div>
+        <a href="https://wa.me/237671743463?text=Bonjour%20FANY%20Design%2C%20je%20souhaite%20passer%20une%20commande."
+           class="btn btn-whatsapp"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Commander sur WhatsApp">
+          💬 Ouvrir WhatsApp
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════ FOOTER ════════════════════ -->
+  <footer role="contentinfo">
+    <div class="footer-logo">FANY Design</div>
+    <div class="footer-sep">✦ Maison de Couture Africaine ✦</div>
+    <p>
+      Cameroun · Contactez-nous :
+      <a href="https://wa.me/237671743463" target="_blank" rel="noopener noreferrer">+237 671 743 463</a>
+    </p>
+    <br />
+    <p style="font-size:0.75rem">© <span id="year"></span> FANY Design — Tous droits réservés.</p>
+  </footer>
+
+  <!-- ════════════════════ MODAL DÉTAIL ════════════════════ -->
+  <div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-label="Détail du modèle">
+    <div class="modal" id="modal" style="position:relative;">
+      <button class="modal-close" id="modalClose" aria-label="Fermer">✕</button>
+      <img src="" alt="" class="modal-img" id="modalImg" />
+      <div class="modal-body">
+        <div class="modal-category" id="modalCategory"></div>
+        <div class="modal-name" id="modalName"></div>
+        <p class="modal-desc" id="modalDesc"></p>
+        <div class="modal-actions">
+          <a href="#" class="btn btn-download btn-sm" id="modalDownload" download>
+            📥 Télécharger
+          </a>
+          <a href="#" class="btn btn-whatsapp btn-sm" id="modalWhatsapp" target="_blank" rel="noopener noreferrer">
+            💬 Commander
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Scripts -->
+  <script src="/app.js"></script>
+</body>
+</html>

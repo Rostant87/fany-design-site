@@ -1,0 +1,34 @@
+[
+  {
+    "id": "MOD001",
+    "name": "Robe Élégance Royale",
+    "category": "Robes",
+    "description": "Robe africaine moderne à motifs wax, parfaite pour les cérémonies et soirées élégantes.",
+    "image": "/images/logo.jpg",
+    "createdAt": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "id": "MOD002",
+    "name": "Ensemble Festif Doré",
+    "category": "Ensembles",
+    "description": "Ensemble deux pièces brodé main, alliant tradition africaine et modernité.",
+    "image": "/images/logo.jpg",
+    "createdAt": "2024-01-02T00:00:00.000Z"
+  },
+  {
+    "id": "MOD003",
+    "name": "Kaba Prestige",
+    "category": "Kaba",
+    "description": "Kaba classique revisité avec des broderies contemporaines et des tissus de haute qualité.",
+    "image": "/images/logo.jpg",
+    "createdAt": "2024-01-03T00:00:00.000Z"
+  },
+  {
+    "id": "MOD004",
+    "name": "Pantalon Wax Urbain",
+    "category": "Pantalons",
+    "description": "Pantalon large en tissu wax, coupe moderne pour un look urban-chic africain.",
+    "image": "/images/logo.jpg",
+    "createdAt": "2024-01-04T00:00:00.000Z"
+  }
+]
