@@ -692,6 +692,46 @@
       .modal-btns { grid-template-columns: 1fr; }
       .stats-bar { grid-template-columns: 1fr 1fr; }
     }
+
+    /* ── Toggle Password Button ─────────────────── */
+    .toggle-password-btn {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+      border-radius: 6px;
+      transition: all var(--transition);
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+    }
+
+    .toggle-password-btn:hover {
+      background: rgba(232,146,10,0.1);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    .toggle-password-btn:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+
+    .toggle-password-btn span {
+      font-size: 16px;
+      line-height: 1;
+      transition: all var(--transition);
+      user-select: none;
+    }
+
+    .toggle-password-btn:hover span {
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body>
@@ -705,9 +745,16 @@
     <input type="text" class="login-input" id="loginUser"
            placeholder="Identifiant" autocomplete="username"
            onkeypress="if(event.key==='Enter') doLogin()" />
-    <input type="password" class="login-input" id="loginPass"
-           placeholder="Mot de passe" autocomplete="current-password"
-           onkeypress="if(event.key==='Enter') doLogin()" />
+    <div style="position: relative; width: 100%;">
+      <input type="password" class="login-input" id="loginPass"
+             placeholder="Mot de passe" autocomplete="current-password"
+             onkeypress="if(event.key==='Enter') doLogin()" />
+      <button type="button" class="toggle-password-btn" id="toggleLoginPass" 
+              onclick="togglePasswordVisibility('loginPass', 'toggleLoginPass')"
+              title="Afficher/Masquer le mot de passe">
+        <span id="toggleLoginPassIcon">👁️</span>
+      </button>
+    </div>
     <button class="login-btn" onclick="doLogin()">Se connecter →</button>
     <p class="login-error" id="loginError">Identifiants incorrects. Réessayez.</p>
   </div>
@@ -824,15 +871,36 @@
         <div class="form-grid">
           <div class="form-group">
             <label class="form-label" for="currentPass">Mot de passe actuel</label>
-            <input type="password" id="currentPass" class="form-input" placeholder="Entrez le mot de passe actuel" />
+            <div style="position: relative; width: 100%;">
+              <input type="password" id="currentPass" class="form-input" placeholder="Entrez le mot de passe actuel" />
+              <button type="button" class="toggle-password-btn" id="toggleCurrentPass" 
+                      onclick="togglePasswordVisibility('currentPass', 'toggleCurrentPass')"
+                      title="Afficher/Masquer le mot de passe">
+                <span id="toggleCurrentPassIcon">👁️</span>
+              </button>
+            </div>
           </div>
           <div class="form-group">
             <label class="form-label" for="newPass">Nouveau mot de passe</label>
-            <input type="password" id="newPass" class="form-input" placeholder="Entrez le nouveau mot de passe" />
+            <div style="position: relative; width: 100%;">
+              <input type="password" id="newPass" class="form-input" placeholder="Entrez le nouveau mot de passe" />
+              <button type="button" class="toggle-password-btn" id="toggleNewPass" 
+                      onclick="togglePasswordVisibility('newPass', 'toggleNewPass')"
+                      title="Afficher/Masquer le mot de passe">
+                <span id="toggleNewPassIcon">👁️</span>
+              </button>
+            </div>
           </div>
           <div class="form-group">
             <label class="form-label" for="confirmPass">Confirmer le mot de passe</label>
-            <input type="password" id="confirmPass" class="form-input" placeholder="Confirmez le nouveau mot de passe" />
+            <div style="position: relative; width: 100%;">
+              <input type="password" id="confirmPass" class="form-input" placeholder="Confirmez le nouveau mot de passe" />
+              <button type="button" class="toggle-password-btn" id="toggleConfirmPass" 
+                      onclick="togglePasswordVisibility('confirmPass', 'toggleConfirmPass')"
+                      title="Afficher/Masquer le mot de passe">
+                <span id="toggleConfirmPassIcon">👁️</span>
+              </button>
+            </div>
           </div>
           <div class="form-group full">
             <button class="btn-submit" onclick="changePassword()" style="background: var(--teal);">
@@ -1250,6 +1318,25 @@ async function changePassword() {
     
   } catch (error) {
     showAdminToast('❌ Erreur lors de la mise à jour: ' + error.message, 'error');
+  }
+}
+
+/* ── Toggle Password Visibility ─────────── */
+function togglePasswordVisibility(inputId, buttonId) {
+  const input = document.getElementById(inputId);
+  const button = document.getElementById(buttonId);
+  const icon = document.getElementById(buttonId + 'Icon');
+  
+  if (!input || !button || !icon) return;
+  
+  if (input.type === 'password') {
+    input.type = 'text';
+    icon.textContent = '👁️';
+    button.style.background = 'rgba(232,146,10,0.15)';
+  } else {
+    input.type = 'password';
+    icon.textContent = '👁️';
+    button.style.background = 'none';
   }
 }
 
