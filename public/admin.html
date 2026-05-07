@@ -1140,15 +1140,38 @@ function updateAdminStats(models = null) {
 }
 
 /* ── Datalist catégories ──────────────── */
-function updateCatDatalist(models) {
+function updateCatDatalist(models = null) {
+  // Si models n'est pas fourni, utiliser allAdminModels
+  if (!models) {
+    models = allAdminModels || [];
+  }
+  
+  // Vérification de sécurité
+  if (!Array.isArray(models)) {
+    console.error('updateCatDatalist: models n\'est pas un tableau', models);
+    return;
+  }
+  
   const cats = [...new Set(models.map(m => m.category))];
   const dl   = document.getElementById('catList');
   if (dl) dl.innerHTML = cats.map(c => `<option value="${escA(c)}">`).join('');
 }
 
 /* ── Rendu liste admin ────────────────── */
-function renderAdminModels(models) {
+function renderAdminModels(models = null) {
   const list = document.getElementById('adminModelsList');
+  
+  // Si models n'est pas fourni, utiliser filteredModels
+  if (!models) {
+    models = filteredModels || [];
+  }
+  
+  // Vérification de sécurité
+  if (!Array.isArray(models)) {
+    console.error('renderAdminModels: models n\'est pas un tableau', models);
+    models = [];
+  }
+  
   if (!models.length) {
     list.innerHTML = `
       <div class="empty-admin">
