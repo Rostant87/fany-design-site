@@ -89,9 +89,27 @@ function initNav() {
 /* ─── Chargement des modèles ─────────────────────── */
 async function loadModels() {
   try {
-    const res  = await fetch(API_BASE);
-    if (!res.ok) throw new Error('Erreur réseau');
-    allModels  = await res.json();
+    // Vérifier si on est sur Vercel
+    function isVercel() {
+      return window.location.hostname.includes('vercel.app');
+    }
+    
+    let models;
+    
+    if (isVercel()) {
+      // Utiliser localStorage sur Vercel (comme l'admin)
+      const stored = localStorage.getItem('fanny_models');
+      models = stored ? JSON.parse(stored) : [];
+      console.log('Chargement modèles depuis localStorage (Vercel):', models.length);
+    } else {
+      // Utiliser l'API en local
+      const res  = await fetch(API_BASE);
+      if (!res.ok) throw new Error('Erreur réseau');
+      models = await res.json();
+      console.log('Chargement modèles depuis API (local):', models.length);
+    }
+    
+    allModels = models;
 
     renderCategories(allModels);
     renderFilters(allModels);
