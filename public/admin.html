@@ -1120,7 +1120,18 @@ async function loadAdminModels() {
 }
 
 /* ── Stats ────────────────────────────── */
-function updateAdminStats(models) {
+function updateAdminStats(models = null) {
+  // Si models n'est pas fourni, utiliser allAdminModels
+  if (!models) {
+    models = allAdminModels || [];
+  }
+  
+  // Vérification supplémentaire
+  if (!Array.isArray(models)) {
+    console.error('updateAdminStats: models n\'est pas un tableau', models);
+    models = [];
+  }
+  
   const cats = [...new Set(models.map(m => m.category))];
   document.getElementById('statTotal').textContent = models.length;
   document.getElementById('statCats').textContent  = cats.length;
@@ -1236,32 +1247,70 @@ function previewImage(inputId, previewId) {
       return;
     }
     
+    // Solution 1: FileReader avec fallback
     console.log('Début de la lecture du fichier...');
-    const reader = new FileReader();
-    
-    reader.onload = function(e) {
-      try {
-        console.log('Fichier lu avec succès, taille:', e.target.result.length);
-        preview.src = e.target.result;
-        preview.style.display = 'block';
-        console.log('Aperçu image chargé avec succès');
-        showAdminToast('✅ Image chargée avec succès', 'success');
-      } catch (error) {
-        console.error('Erreur affichage aperçu:', error);
-        showAdminToast('❌ Erreur lors de l\'affichage de l\'aperçu', 'error');
-      }
-    };
-    
-    reader.onerror = function(error) {
-      console.error('Erreur lecture fichier:', error);
-      showAdminToast('❌ Erreur lors de la lecture du fichier', 'error');
-    };
-    
-    reader.readAsDataURL(file);
+    try {
+      const reader = new FileReader();
+      
+      reader.onload = function(e) {
+        try {
+          console.log('Fichier lu avec succès, taille:', e.target.result.length);
+          preview.src = e.target.result;
+          preview.style.display = 'block';
+          console.log('Aperçu image chargé avec succès');
+          showAdminToast('✅ Image chargée avec succès', 'success');
+        } catch (error) {
+          console.error('Erreur affichage aperçu:', error);
+          // Solution 2: Fallback avec URL.createObjectURL
+          tryFallback(file, preview);
+        }
+      };
+      
+      reader.onerror = function(error) {
+        console.error('Erreur lecture fichier:', error);
+        // Solution 2: Fallback avec URL.createObjectURL
+        tryFallback(file, preview);
+      };
+      
+      reader.readAsDataURL(file);
+      
+    } catch (error) {
+      console.error('Erreur FileReader:', error);
+      // Solution 2: Fallback direct
+      tryFallback(file, preview);
+    }
     
   } catch (error) {
     console.error('Erreur dans previewImage:', error);
     showAdminToast('❌ Erreur inattendue: ' + error.message, 'error');
+  }
+}
+
+/* ── Fallback pour l'aperçu image ─────────── */
+function tryFallback(file, preview) {
+  console.log('Tentative de fallback avec createObjectURL...');
+  try {
+    if (URL && URL.createObjectURL) {
+      const objectUrl = URL.createObjectURL(file);
+      preview.src = objectUrl;
+      preview.style.display = 'block';
+      console.log('Fallback réussi avec createObjectURL');
+      showAdminToast('✅ Image chargée (mode compatibilité)', 'success');
+      
+      // Nettoyer l'URL après utilisation
+      setTimeout(() => {
+        if (URL.revokeObjectURL) {
+          URL.revokeObjectURL(objectUrl);
+        }
+      }, 10000); // Nettoyer après 10 secondes
+    } else {
+      throw new Error('URL.createObjectURL non supporté');
+    }
+  } catch (error) {
+    console.error('Fallback échoué:', error);
+    // Solution 3: Message informatif
+    preview.style.display = 'none';
+    showAdminToast('⚠️ Aperçu non disponible. Image sélectionnée pour l\'ajout.', 'warning');
   }
 }
 
