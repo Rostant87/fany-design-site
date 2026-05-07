@@ -4,7 +4,7 @@
     "name": "Robe Élégance Royale",
     "category": "Robes",
     "description": "Robe africaine moderne à motifs wax, parfaite pour les cérémonies et soirées élégantes.",
-    "image": "/images/logo.jpg",
+    "image": "/images/logo.png",
     "createdAt": "2024-01-01T00:00:00.000Z"
   },
   {
@@ -12,7 +12,7 @@
     "name": "Ensemble Festif Doré",
     "category": "Ensembles",
     "description": "Ensemble deux pièces brodé main, alliant tradition africaine et modernité.",
-    "image": "/images/logo.jpg",
+    "image": "/images/logo.png",
     "createdAt": "2024-01-02T00:00:00.000Z"
   },
   {
@@ -20,7 +20,7 @@
     "name": "Kaba Prestige",
     "category": "Kaba",
     "description": "Kaba classique revisité avec des broderies contemporaines et des tissus de haute qualité.",
-    "image": "/images/logo.jpg",
+    "image": "/images/logo.png",
     "createdAt": "2024-01-03T00:00:00.000Z"
   },
   {
@@ -28,7 +28,23 @@
     "name": "Pantalon Wax Urbain",
     "category": "Pantalons",
     "description": "Pantalon large en tissu wax, coupe moderne pour un look urban-chic africain.",
-    "image": "/images/logo.jpg",
+    "image": "/images/logo.png",
     "createdAt": "2024-01-04T00:00:00.000Z"
+  },
+  {
+    "id": "MOD005",
+    "name": "Chemise Boubou Classique",
+    "category": "Tenues Homme",
+    "description": "Chemise boubou traditionnelle en tissu wax, col mandarin et broderies fines.",
+    "image": "/images/logo.png",
+    "createdAt": "2024-01-05T00:00:00.000Z"
+  },
+  {
+    "id": "MOD006",
+    "name": "Complet Africain Moderne",
+    "category": "Tenues Homme",
+    "description": "Ensemble trois pièces avec chemise, pantalon et boubou assortis.",
+    "image": "/images/logo.png",
+    "createdAt": "2024-01-06T00:00:00.000Z"
   }
 ]

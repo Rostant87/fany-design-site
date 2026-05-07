@@ -20,6 +20,10 @@ const CATEGORY_ICONS = {
   'chemise':    '👔',
   'jupes':      '🩱',
   'jupe':       '🩱',
+  'tenues homme': '🤵',
+  'tenue homme': '🤵',
+  'hommes':     '🤵',
+  'homme':      '🤵',
   'default':    '🪡'
 };
 
