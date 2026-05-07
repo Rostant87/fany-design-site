@@ -266,7 +266,7 @@ function buildModelCard(model) {
       </div>
       <div class="model-body">
         <h3 class="model-name">${escapeHtml(model.name)}</h3>
-        <p class="model-desc">${escapeHtml(model.description || 'Créations MESMINE STYLE')}</p>
+        <p class="model-desc">${escapeHtml(model.description || 'Créations Mesmine Style')}</p>
         <div class="model-actions">
           <button class="btn btn-download btn-sm"
                   onclick="downloadModel(event, '${escapeAttr(imgSrc)}', '${escapeAttr(model.name)}')"
@@ -355,7 +355,7 @@ function openModal(model) {
   nameEl.textContent = model.name;
   descEl.textContent = model.description || '';
   dlBtn.href   = model.image || '/images/logo.png';
-  dlBtn.setAttribute('download', `FANNY-Design-${model.name}.jpg`);
+  dlBtn.setAttribute('download', `Mesmine-Style-${model.name}.jpg`);
   waBtn.href   = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 
   backdrop.classList.add('open');

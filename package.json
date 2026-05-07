@@ -1,7 +1,7 @@
 {
   "name": "mesmine-style",
   "version": "1.0.0",
-  "description": "Site vitrine officiel de MESMINE STYLE - Maison de couture africaine",
+  "description": "Site vitrine officiel de Mesmine Style - Maison de couture africaine",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -12,6 +12,9 @@
     "multer": "^1.4.5-lts.1",
     "cors": "^2.8.5"
   },
+  "keywords": ["couture", "mode", "africaine", "cameroun", "mesmine-style"],
+  "author": "Mesmine Style",
+  "license": "MIT",
   "devDependencies": {
     "nodemon": "^3.0.1"
   }

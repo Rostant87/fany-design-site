@@ -1,6 +1,6 @@
 {
-  "name": "MESMINE STYLE - Maison de Couture Africaine",
-  "short_name": "MESMINE STYLE",
+  "name": "Mesmine Style - Maison de Couture Africaine",
+  "short_name": "Mesmine Style",
   "description": "Maison de couture africaine au Cameroun. Robes, ensembles, kaba et tenues sur mesure.",
   "start_url": "/",
   "display": "standalone",
@@ -79,7 +79,7 @@
       "sizes": "512x512",
       "type": "image/png",
       "form_factor": "wide",
-      "label": "MESMINE STYLE - Page d'accueil"
+      "label": "Mesmine Style - Page d'accueil"
     }
   ]
 }

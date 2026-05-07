@@ -1,4 +1,4 @@
-# 🎨 MESMINE STYLE — Site Vitrine
+# 🎨 Mesmine Style — Site Vitrine
 
 **Maison de Couture Africaine au Cameroun**
 
@@ -116,5 +116,5 @@ pm2 startup
 
 ## 📧 Support
 
-Pour toute question technique, contactez MESMINE STYLE :
+Pour toute question technique, contactez Mesmine Style :
 **WhatsApp : +237 671 743 463**
