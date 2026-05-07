@@ -1,5 +1,5 @@
 /* =====================================================
-   FANNY DESIGN — Styles principaux
+   MESMINE STYLE — Styles principaux
    Maison de couture africaine
    Palette : Marine profond · Or · Rouge africain · Turquoise
    ===================================================== */
@@ -778,7 +778,7 @@ a   { text-decoration: none; color: inherit; }
 }
 
 .about::before {
-  content: '✦ FANNY DESIGN ✦';
+  content: '✦ MESMINE STYLE ✦';
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);

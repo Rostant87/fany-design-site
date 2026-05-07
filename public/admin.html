@@ -739,9 +739,9 @@
 <!-- ══════════ ÉCRAN LOGIN ══════════ -->
 <div id="loginScreen">
   <div class="login-card">
-    <img src="/images/logo.jpg" alt="Logo FANNY Design" class="login-logo" />
+    <img src="/images/logo.jpg" alt="Logo MESMINE STYLE" class="login-logo" />
     <h1 class="login-title">Administration</h1>
-    <p class="login-sub">FANNY Design · Accès sécurisé</p>
+    <p class="login-sub">MESMINE STYLE · Accès sécurisé</p>
     <input type="text" class="login-input" id="loginUser"
            placeholder="Identifiant" autocomplete="username"
            onkeypress="if(event.key==='Enter') doLogin()" />
@@ -766,9 +766,9 @@
   <!-- Header -->
   <header class="admin-header">
     <div class="admin-logo">
-      <img src="/images/logo.jpg" alt="Logo FANNY Design" />
+      <img src="/images/logo.jpg" alt="Logo MESMINE STYLE" />
       <div>
-        <div class="admin-logo-text">FANNY Design</div>
+        <div class="admin-logo-text">MESMINE STYLE</div>
         <span class="admin-logo-sub">Panneau Admin</span>
       </div>
     </div>
@@ -996,7 +996,7 @@
 
 <script>
 /* ─────────────────────────────────────────
-   FANNY Design — admin.js (inline)
+   MESMINE STYLE — admin.js (inline)
    ───────────────────────────────────────── */
 
 const ADMIN_CREDS = { user: 'f@nny', pass: 'F@nny2026' };
@@ -1210,14 +1210,35 @@ async function addModel() {
   if (!cat)  return showAdminToast('La catégorie est obligatoire.', 'error');
 
   if (isVercel()) {
-    // Mode Vercel : utiliser localStorage
+    // Mode Vercel : utiliser localStorage avec gestion d'images
     const models = getLocalModels();
+    let imageUrl = '/images/logo.jpg'; // Default
+    
+    // Gestion de l'image uploadée (simulation pour Vercel)
+    if (file) {
+      try {
+        // Créer une URL temporaire pour l'aperçu
+        imageUrl = URL.createObjectURL(file);
+        
+        // Sauvegarder l'image en base64 pour localStorage (optionnel)
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const imageData = e.target.result;
+          localStorage.setItem('temp_image_' + Date.now(), imageData);
+        };
+        reader.readAsDataURL(file);
+      } catch (error) {
+        console.log('Erreur traitement image:', error);
+        imageUrl = '/images/logo.jpg';
+      }
+    }
+    
     const newModel = {
       id: 'MOD' + String(models.length + 1).padStart(3, '0'),
       name: name,
       category: cat,
       description: desc,
-      image: '/images/logo.jpg', // Placeholder pour Vercel
+      image: imageUrl,
       createdAt: new Date().toISOString()
     };
     
@@ -1232,7 +1253,10 @@ async function addModel() {
     document.getElementById('addDesc').value  = '';
     document.getElementById('addImage').value = '';
     const prev = document.getElementById('addPreview');
-    if (prev) { prev.src = ''; prev.style.display = 'none'; }
+    if (prev) { 
+      prev.src = ''; 
+      prev.style.display = 'none'; 
+    }
 
     await loadAdminModels();
     document.getElementById('addSection').classList.add('collapsed');
