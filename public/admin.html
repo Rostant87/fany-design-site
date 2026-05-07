@@ -843,7 +843,7 @@
             <label class="form-label">Image du modèle</label>
             <div class="upload-zone" id="addUploadZone">
               <input type="file" id="addImage" accept="image/jpeg,image/jpg,image/png,image/gif,image/webp"
-                     onchange="previewImage('addImage','addPreview')" />
+                     onchange="console.log('File input changed'); previewImage('addImage','addPreview')" />
               <div class="upload-icon">🖼️</div>
               <p class="upload-text">
                 <strong>Cliquez ou glissez</strong> une image ici<br />
@@ -1187,9 +1187,14 @@ function toggleSection(el) {
 
 /* ── Aperçu image ─────────────────────── */
 function previewImage(inputId, previewId) {
+  console.log('previewImage appelée avec:', inputId, previewId);
+  
   try {
     const input   = document.getElementById(inputId);
     const preview = document.getElementById(previewId);
+    
+    console.log('Input trouvé:', !!input);
+    console.log('Preview trouvé:', !!preview);
     
     if (!input) {
       console.error('Input non trouvé:', inputId);
@@ -1204,6 +1209,10 @@ function previewImage(inputId, previewId) {
     }
     
     const file = input.files[0];
+    console.log('Fichier sélectionné:', !!file);
+    console.log('Type de fichier:', file ? file.type : 'none');
+    console.log('Taille du fichier:', file ? file.size : 'none');
+    
     if (!file) {
       console.log('Aucun fichier sélectionné');
       preview.src = '';
@@ -1214,6 +1223,7 @@ function previewImage(inputId, previewId) {
     // Vérifier le type de fichier
     const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
     if (!validTypes.includes(file.type)) {
+      console.error('Type de fichier invalide:', file.type);
       showAdminToast('❌ Format non supporté. Utilisez JPG, PNG, GIF ou WEBP', 'error');
       return;
     }
@@ -1221,24 +1231,29 @@ function previewImage(inputId, previewId) {
     // Vérifier la taille (max 10MB)
     const maxSize = 10 * 1024 * 1024; // 10MB
     if (file.size > maxSize) {
+      console.error('Fichier trop volumineux:', file.size);
       showAdminToast('❌ Image trop volumineuse. Maximum 10MB autorisé', 'error');
       return;
     }
     
+    console.log('Début de la lecture du fichier...');
     const reader = new FileReader();
+    
     reader.onload = function(e) {
       try {
+        console.log('Fichier lu avec succès, taille:', e.target.result.length);
         preview.src = e.target.result;
         preview.style.display = 'block';
         console.log('Aperçu image chargé avec succès');
+        showAdminToast('✅ Image chargée avec succès', 'success');
       } catch (error) {
         console.error('Erreur affichage aperçu:', error);
         showAdminToast('❌ Erreur lors de l\'affichage de l\'aperçu', 'error');
       }
     };
     
-    reader.onerror = function() {
-      console.error('Erreur lecture fichier');
+    reader.onerror = function(error) {
+      console.error('Erreur lecture fichier:', error);
       showAdminToast('❌ Erreur lors de la lecture du fichier', 'error');
     };
     
