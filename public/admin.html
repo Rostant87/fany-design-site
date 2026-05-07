@@ -1187,15 +1187,67 @@ function toggleSection(el) {
 
 /* ── Aperçu image ─────────────────────── */
 function previewImage(inputId, previewId) {
-  const file    = document.getElementById(inputId).files[0];
-  const preview = document.getElementById(previewId);
-  if (!file || !preview) return;
-  const reader  = new FileReader();
-  reader.onload = e => {
-    preview.src           = e.target.result;
-    preview.style.display = 'block';
-  };
-  reader.readAsDataURL(file);
+  try {
+    const input   = document.getElementById(inputId);
+    const preview = document.getElementById(previewId);
+    
+    if (!input) {
+      console.error('Input non trouvé:', inputId);
+      showAdminToast('❌ Erreur: Champ image non trouvé', 'error');
+      return;
+    }
+    
+    if (!preview) {
+      console.error('Preview non trouvé:', previewId);
+      showAdminToast('❌ Erreur: Zone d\'aperçu non trouvée', 'error');
+      return;
+    }
+    
+    const file = input.files[0];
+    if (!file) {
+      console.log('Aucun fichier sélectionné');
+      preview.src = '';
+      preview.style.display = 'none';
+      return;
+    }
+    
+    // Vérifier le type de fichier
+    const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+    if (!validTypes.includes(file.type)) {
+      showAdminToast('❌ Format non supporté. Utilisez JPG, PNG, GIF ou WEBP', 'error');
+      return;
+    }
+    
+    // Vérifier la taille (max 10MB)
+    const maxSize = 10 * 1024 * 1024; // 10MB
+    if (file.size > maxSize) {
+      showAdminToast('❌ Image trop volumineuse. Maximum 10MB autorisé', 'error');
+      return;
+    }
+    
+    const reader = new FileReader();
+    reader.onload = function(e) {
+      try {
+        preview.src = e.target.result;
+        preview.style.display = 'block';
+        console.log('Aperçu image chargé avec succès');
+      } catch (error) {
+        console.error('Erreur affichage aperçu:', error);
+        showAdminToast('❌ Erreur lors de l\'affichage de l\'aperçu', 'error');
+      }
+    };
+    
+    reader.onerror = function() {
+      console.error('Erreur lecture fichier');
+      showAdminToast('❌ Erreur lors de la lecture du fichier', 'error');
+    };
+    
+    reader.readAsDataURL(file);
+    
+  } catch (error) {
+    console.error('Erreur dans previewImage:', error);
+    showAdminToast('❌ Erreur inattendue: ' + error.message, 'error');
+  }
 }
 
 /* ── Ajouter un modèle ────────────────── */
