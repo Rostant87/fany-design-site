@@ -1,4 +1,4 @@
-# 🎨 FANNY Design — Site Vitrine
+# 🎨 MESMINE STYLE — Site Vitrine
 
 **Maison de Couture Africaine au Cameroun**
 
@@ -116,5 +116,5 @@ pm2 startup
 
 ## 📧 Support
 
-Pour toute question technique, contactez FANNY Design :
+Pour toute question technique, contactez MESMINE STYLE :
 **WhatsApp : +237 671 743 463**

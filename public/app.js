@@ -1,5 +1,5 @@
 /**
- * FANNY Design — app.js
+ * MESMINE STYLE — app.js
  * Logique frontend : chargement modèles, filtres, modal, WhatsApp, téléchargement
  */
 
@@ -262,7 +262,7 @@ function buildModelCard(model) {
       </div>
       <div class="model-body">
         <h3 class="model-name">${escapeHtml(model.name)}</h3>
-        <p class="model-desc">${escapeHtml(model.description || 'Créations FANNY Design')}</p>
+        <p class="model-desc">${escapeHtml(model.description || 'Créations MESMINE STYLE')}</p>
         <div class="model-actions">
           <button class="btn btn-download btn-sm"
                   onclick="downloadModel(event, '${escapeAttr(imgSrc)}', '${escapeAttr(model.name)}')"
