@@ -244,7 +244,7 @@ function renderModels(models) {
 /* ─── Construction d'une carte ───────────────────── */
 function buildModelCard(model) {
   const icon    = CATEGORY_ICONS[model.category?.toLowerCase()] || CATEGORY_ICONS['default'];
-  const imgSrc  = model.image || '/images/logo.jpg';
+  const imgSrc  = model.image || '/images/logo.png';
   const waText  = encodeURIComponent(
     `Bonjour, je souhaite commander le modèle ${model.name} (Réf: ${model.id})`
   );
@@ -256,7 +256,7 @@ function buildModelCard(model) {
         <img src="${escapeAttr(imgSrc)}"
              alt="${escapeAttr(model.name)}"
              loading="lazy"
-             onerror="this.src='/images/logo.jpg'" />
+             onerror="this.src='/images/logo.png'" />
         <span class="model-badge">${icon} ${escapeHtml(model.category || 'Modèle')}</span>
         <span class="model-id">${escapeHtml(model.id)}</span>
       </div>
@@ -345,12 +345,12 @@ function openModal(model) {
     `Bonjour, je souhaite commander le modèle ${model.name} (Réf: ${model.id})`
   );
 
-  imgEl.src   = model.image || '/images/logo.jpg';
+  imgEl.src   = model.image || '/images/logo.png';
   imgEl.alt   = model.name;
   catEl.textContent = model.category || '';
   nameEl.textContent = model.name;
   descEl.textContent = model.description || '';
-  dlBtn.href   = model.image || '/images/logo.jpg';
+  dlBtn.href   = model.image || '/images/logo.png';
   dlBtn.setAttribute('download', `FANNY-Design-${model.name}.jpg`);
   waBtn.href   = `https://wa.me/${WHATSAPP_NUMBER}?text=${waText}`;
 

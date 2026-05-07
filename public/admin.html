@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Administration — FANNY Design</title>
-  <link rel="icon" type="image/jpeg" href="/images/logo.jpg" />
+  <link rel="icon" type="image/png" href="/images/logo.png" />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Josefin+Sans:wght@300;400;600&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
   <style>
@@ -739,7 +739,7 @@
 <!-- ══════════ ÉCRAN LOGIN ══════════ -->
 <div id="loginScreen">
   <div class="login-card">
-    <img src="/images/logo.jpg" alt="Logo MESMINE STYLE" class="login-logo" />
+    <img src="/images/logo.png" alt="Logo MESMINE STYLE" class="login-logo" />
     <h1 class="login-title">Administration</h1>
     <p class="login-sub">MESMINE STYLE · Accès sécurisé</p>
     <input type="text" class="login-input" id="loginUser"
@@ -766,7 +766,7 @@
   <!-- Header -->
   <header class="admin-header">
     <div class="admin-logo">
-      <img src="/images/logo.jpg" alt="Logo MESMINE STYLE" />
+      <img src="/images/logo.png" alt="Logo MESMINE STYLE" />
       <div>
         <div class="admin-logo-text">MESMINE STYLE</div>
         <span class="admin-logo-sub">Panneau Admin</span>
@@ -1014,7 +1014,7 @@ function getLocalModels() {
       "name": "Robe Élégance Royale",
       "category": "Robes",
       "description": "Robe africaine moderne à motifs wax, parfaite pour les cérémonies et soirées élégantes.",
-      "image": "/images/logo.jpg",
+      "image": "/images/logo.png",
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
@@ -1022,7 +1022,7 @@ function getLocalModels() {
       "name": "Ensemble Festif Doré",
       "category": "Ensembles",
       "description": "Ensemble deux pièces brodé main, alliant tradition africaine et modernité.",
-      "image": "/images/logo.jpg",
+      "image": "/images/logo.png",
       "createdAt": "2024-01-02T00:00:00.000Z"
     },
     {
@@ -1030,7 +1030,7 @@ function getLocalModels() {
       "name": "Kaba Prestige",
       "category": "Kaba",
       "description": "Kaba classique revisité avec des broderies contemporaines et des tissus de haute qualité.",
-      "image": "/images/logo.jpg",
+      "image": "/images/logo.png",
       "createdAt": "2024-01-03T00:00:00.000Z"
     },
     {
@@ -1038,7 +1038,7 @@ function getLocalModels() {
       "name": "Pantalon Wax Urbain",
       "category": "Pantalons",
       "description": "Pantalon large en tissu wax, coupe moderne pour un look urban-chic africain.",
-      "image": "/images/logo.jpg",
+      "image": "/images/logo.png",
       "createdAt": "2024-01-04T00:00:00.000Z"
     }
   ];
@@ -1183,8 +1183,8 @@ function renderAdminModels(models = null) {
 
   list.innerHTML = models.map(m => `
     <div class="admin-model-card" id="card-${escA(m.id)}">
-      <img src="${escA(m.image||'/images/logo.jpg')}" class="admin-model-img"
-           alt="${escA(m.name)}" onerror="this.src='/images/logo.jpg'" />
+      <img src="${escA(m.image||'/images/logo.png')}" class="admin-model-img"
+           alt="${escA(m.name)}" onerror="this.src='/images/logo.png'" />
       <div class="admin-model-info">
         <div class="admin-model-name">${escH(m.name)}</div>
         <div class="admin-model-meta">
@@ -1351,7 +1351,7 @@ async function addModel() {
   if (isVercel()) {
     // Mode Vercel : utiliser localStorage avec gestion d'images
     const models = getLocalModels();
-    let imageUrl = '/images/logo.jpg'; // Default
+    let imageUrl = '/images/logo.png'; // Default
     
     // Gestion de l'image uploadée (simulation pour Vercel)
     if (file) {
@@ -1368,7 +1368,7 @@ async function addModel() {
         reader.readAsDataURL(file);
       } catch (error) {
         console.log('Erreur traitement image:', error);
-        imageUrl = '/images/logo.jpg';
+        imageUrl = '/images/logo.png';
       }
     }
     
